@@ -178,13 +178,13 @@ void CSqueakGrenade :: Killed( entvars_t *pevAttacker, int iGib )
 
 	UTIL_BloodDrips( pev->origin, g_vecZero, BloodColor(), 80 );
 
-	if (m_hOwner != NULL)
+	if (m_hOwner != NULL && m_hOwner.Get())
 		RadiusDamage ( pev, m_hOwner->pev, pev->dmg, CLASS_NONE, DMG_BLAST );
 	else
 		RadiusDamage ( pev, pev, pev->dmg, CLASS_NONE, DMG_BLAST );
 
 	// reset owner so death message happens
-	if (m_hOwner != NULL)
+	if (m_hOwner != NULL && m_hOwner.Get())
 		pev->owner = m_hOwner->edict();
 
 	CBaseMonster :: Killed( pevAttacker, GIB_ALWAYS );
