@@ -92,7 +92,7 @@ int CSqueakGrenade :: Classify ( void )
 	if (m_iMyClass != 0)
 		return m_iMyClass; // protect against recursion
 
-	if (m_hEnemy != NULL)
+	if (m_hEnemy != NULL && m_hEnemy.Get() )
 	{
 		m_iMyClass = CLASS_INSECT; // no one cares about it
 		switch( m_hEnemy->Classify( ) )
@@ -251,7 +251,7 @@ void CSqueakGrenade::HuntThink( void )
 
 	UTIL_MakeVectors( pev->angles );
 
-	if (m_hEnemy == NULL || !m_hEnemy->IsAlive())
+	if (m_hEnemy == NULL || !m_hEnemy.Get() || !m_hEnemy->IsAlive())
 	{
 		// find target, bounce a bit towards it.
 		Look( 512 );
@@ -270,7 +270,7 @@ void CSqueakGrenade::HuntThink( void )
 	if (flpitch < 80)
 		flpitch = 80;
 
-	if (m_hEnemy != NULL)
+	if (m_hEnemy != NULL && m_hEnemy.Get())
 	{
 		if (FVisible( m_hEnemy ))
 		{
@@ -353,7 +353,7 @@ void CSqueakGrenade::SuperBounceTouch( CBaseEntity *pOther )
 				// ALERT( at_console, "hit enemy\n");
 				ClearMultiDamage( );
 				pOther->TraceAttack(pev, gSkillData.snarkDmgBite, gpGlobals->v_forward, &tr, DMG_SLASH ); 
-				if (m_hOwner != NULL)
+				if (m_hOwner != NULL && m_hOwner.Get())
 					ApplyMultiDamage( pev, m_hOwner->pev );
 				else
 					ApplyMultiDamage( pev, pev );

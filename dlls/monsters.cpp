@@ -1199,7 +1199,7 @@ BOOL CBaseMonster :: PopEnemy( )
 	// UNDONE: blah, this is bad, we should use a stack but I'm too lazy to code one.
 	for (int i = MAX_OLD_ENEMIES - 1; i >= 0; i--)
 	{
-		if (m_hOldEnemy[i] != NULL)
+		if (m_hOldEnemy[i] != NULL && m_hOldEnemy[i].Get())
 		{
 			if (m_hOldEnemy[i]->IsAlive( )) // cheat and know when they die
 			{
