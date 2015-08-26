@@ -1069,7 +1069,8 @@ int CBaseMonster :: CheckEnemy ( CBaseEntity *pEnemy )
 	}
 	else
 		ClearConditions( bits_COND_ENEMY_OCCLUDED );
-
+	if( !pEnemy )
+		return FALSE;
 	if ( !pEnemy->IsAlive() )
 	{
 		SetConditions ( bits_COND_ENEMY_DEAD );
